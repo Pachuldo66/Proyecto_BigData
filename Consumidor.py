@@ -1,4 +1,5 @@
-"""pip install confluent-kafka"""
+#se instala en el cmd 
+##pip install confluent-kafk
 config = {
     "bootstrap.servers":"pkc-6ojv2.us-west4.gcp.confluent.cloud:9092",
     "security.protocol":"SASL_SSL",
@@ -8,8 +9,8 @@ config = {
     "session.timeout.ms":"45000"
 
 }
-"""from confluent_kafka import Consumer
-import json"""
+from confluent_kafka import Consumer 
+import json
 
 props = config
 props["group.id"] = "python-group-1"
@@ -43,8 +44,12 @@ except KeyboardInterrupt:
 finally:
         consumer.close()
 
-"""pip install "pymongo[srv]"""""
-"""from pymongo import MongoClient"""
+## se intala en cmd
+#pip install "pymongo[srv]"
+
+from pymongo import MongoClient
+
+
 def get_database():
  
    # Provide the mongodb atlas url to connect python to mongodb using pymongo
