@@ -1,0 +1,33 @@
+import socket
+
+# Creamos un objeto de socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+# Definimos la dirección IP y el puerto en el que escucharemos
+host = '127.0.0.1'  # localhost
+port = 8080
+
+# Enlazamos el socket a la dirección IP y al puerto
+sock.bind((host, port))
+
+# Escuchamos conexiones entrantes (máximo 1 conexión en cola)
+sock.listen(1)
+
+print('Esperando conexiones entrantes...')
+
+# Aceptamos la conexión entrante
+cliente, direccion = sock.accept()
+
+print('Conexión establecida desde:', direccion)
+
+# Enviamos datos al cliente
+mensaje = '¡Hola desde el servidor!'
+cliente.send(mensaje.encode())
+
+# Recibimos datos del cliente
+datos = cliente.recv(1024).decode()
+print('Cliente dice:', datos)
+
+# Cerramos la conexión
+cliente.close()
+sock.close()
