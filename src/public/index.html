@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socket.IO Client</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.1/socket.io.js"></script>
+  <script>
+    const socket = io("http://localhost:3000");
+
+    // Función para agregar una nueva fila a la tabla
+    function addRow(data) {
+      const dataBody = document.getElementById('data-body');
+      const row = document.createElement('tr');
+      const btcCell = document.createElement('td');
+      btcCell.textContent = data.BTC;
+      row.appendChild(btcCell);
+      const usdCell = document.createElement('td');
+      usdCell.textContent = data.USD;
+      row.appendChild(usdCell);
+      const eurCell = document.createElement('td');
+      eurCell.textContent = data.EUR;
+      row.appendChild(eurCell);
+      dataBody.appendChild(row);
+    }
+
+    // Escucha el evento 'message' enviado por el servidor
+    socket.on('message', (data) => {
+      // Parsea los datos recibidos
+      const parsedData = JSON.parse(data);
+      
+      // Obtiene los valores del valor de moneda
+      const { BTC, USD, EUR } = parsedData;
+
+      // Muestra los datos por separado en la consola
+      console.log("Bitcoin:", BTC);
+      console.log("Dólar:", USD);
+      console.log("Euro:", EUR);
+      
+      // Actualiza los datos en la página
+      document.getElementById('bitcoin').innerText = `Bitcoin: ${BTC}`;
+      document.getElementById('dollar').innerText = `Dólar: ${USD}`;
+      document.getElementById('euro').innerText = `Euro: ${EUR}`;
+
+      // Agrega una nueva fila a la tabla con los datos recibidos
+      addRow(parsedData);
+    });
+  </script>
+</head>
+<body>
+  <h1>Socket.IO Client</h1>
+  <div id="bitcoin"></div>
+  <div id="dollar"></div>
+  <div id="euro"></div>
+
+  <h1>Datos almacenados en la base de datos</h1>
+  <table id="data-table">
+    <thead>
+      <tr>
+        <th>BTC</th>
+        <th>USD</th>
+        <th>EUR</th>
+      </tr>
+    </thead>
+    <tbody id="data-body"></tbody>
+  </table>
+
+</body>
+</html>

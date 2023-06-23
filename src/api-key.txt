@@ -1,0 +1,10 @@
+=== Confluent Cloud API key: lkc-xrmwxq ===
+
+API key:
+PHQ7RBAHEFHF3RTC
+
+API secret:
+Qi8D4JosubbeNExV+Tpyd3YMqS/734WI2jvnyfOoXoDK/bRi9t3N2NxjHtpF1ywn
+
+Bootstrap server:
+pkc-ymrq7.us-east-2.aws.confluent.cloud:9092
